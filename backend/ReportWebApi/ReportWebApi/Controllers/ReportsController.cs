@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ReportWebApi.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -12,6 +13,7 @@ namespace ReportWebApi.Controllers;
 public class ReportsController : ControllerBase
 {
     [HttpGet]
+    [Authorize(Policy = "OnlyForProtheticUser")]
     [Produces("application/json")]
     [SwaggerResponse(StatusCodes.Status200OK, Description = "Запрос успешно прошел")]
     public Task<ReportModel[]> GetReports()
