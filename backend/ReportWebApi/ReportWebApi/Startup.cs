@@ -1,4 +1,6 @@
-﻿namespace ReportWebApi;
+﻿using System.Security.Claims;
+
+namespace ReportWebApi;
 
 public class Startup
 {
@@ -30,6 +32,11 @@ public class Startup
         }
 
         app.UseRouting();
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapGet("/whoami",
+                (ClaimsPrincipal user) => Results.Ok(user.Claims.Select(c => new { c.Type, c.Value })));
+        });
     }
 }
