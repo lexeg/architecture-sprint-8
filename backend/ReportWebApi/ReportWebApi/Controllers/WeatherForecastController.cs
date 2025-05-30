@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ReportWebApi.Models;
 
 namespace ReportWebApi.Controllers;
 

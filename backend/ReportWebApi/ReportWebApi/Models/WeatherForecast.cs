@@ -1,4 +1,4 @@
-namespace ReportWebApi;
+namespace ReportWebApi.Models;
 
 public class WeatherForecast
 {
