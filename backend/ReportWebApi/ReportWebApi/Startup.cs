@@ -59,14 +59,13 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseCors(x => x
-            .AllowAnyOrigin()
-            // .WithOrigins(GetAllowedOrigins(_configuration))
+            .WithOrigins(GetAllowedOrigins(_configuration))
             .AllowAnyMethod()
             .AllowAnyHeader());
 
 
         // Configure the HTTP request pipeline.
-        // if (env.IsDevelopment())
+        if (env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
