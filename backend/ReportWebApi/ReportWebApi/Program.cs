@@ -9,6 +9,6 @@ public class Program
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration(x => x.AddJsonFile("appsettings.development.json"))
+            .ConfigureAppConfiguration(x => x.AddJsonFile("appsettings.Development.json"))
             .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 }

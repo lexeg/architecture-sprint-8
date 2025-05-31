@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using ReportWebApi.Authorization;
 
@@ -24,6 +25,8 @@ public class Startup
     {
         // Add services to the container.
         services.AddControllers();
+
+        services.AddScoped<IClaimsTransformation, AddRolesClaimsTransformation>();
 
         services
             .AddAuthentication("Bearer")
@@ -56,21 +59,21 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseCors(x => x
-            // .AllowAnyOrigin()
-            .WithOrigins(GetAllowedOrigins(_configuration))
+            .AllowAnyOrigin()
+            // .WithOrigins(GetAllowedOrigins(_configuration))
             .AllowAnyMethod()
             .AllowAnyHeader());
 
 
         // Configure the HTTP request pipeline.
-        if (env.IsDevelopment())
+        // if (env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
 
-        app.UseAuthentication();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
